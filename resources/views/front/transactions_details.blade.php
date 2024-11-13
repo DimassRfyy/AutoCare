@@ -94,6 +94,14 @@
         <hr class="border-[#E9E8ED]">
         <div id="Time-details" class="flex flex-col gap-[10px]">
           <div class="flex items-center justify-between">
+            <p class="text-sm leading-[21px]">Name</p>
+            <p class="font-semibold">{{$details->name}}</p>
+          </div>
+          <div class="flex items-center justify-between">
+            <p class="text-sm leading-[21px]">Phone</p>
+            <p class="font-semibold">{{$details->phone_number}}</p>
+          </div>
+          <div class="flex items-center justify-between">
             <p class="text-sm leading-[21px]">Time At</p>
             <p class="font-semibold">{{$details->time_at}} WIB</p>
           </div>
@@ -135,8 +143,8 @@
     // Check if current date and time is past the target date and time
     $isPastDateAndTime = $currentDateTime->greaterThan($targetDateTime);
 @endphp
-    
-<div class="px-8 mt-[30px] flex">
+
+<div class="px-8 mt-[30px] mb-5 flex">
   @if($isPastDateAndTime)
       <a href="{{ route('giveRating', ['id' => $details->id]) }}"
          class="w-full rounded-full p-[12px_20px] bg-[#FF8E62] font-bold text-white text-center">

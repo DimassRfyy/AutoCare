@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class CarStore extends Model
@@ -51,4 +52,32 @@ class CarStore extends Model
     public function transactions(): HasMany {
         return $this->hasMany(BookingTransaction::class);
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+    
+        static::deleting(function ($CarStore) {
+            // Delete thumbnail if it exists
+            if ($CarStore->thumbnail && Storage::disk('public')->exists($CarStore->thumbnail)) {
+                Storage::disk('public')->delete($CarStore->thumbnail);
+            }
+    
+            foreach ($CarStore->photos as $photo) {
+                if (Storage::disk('public')->exists($photo->path)) {
+                    Storage::disk('public')->delete($photo->path);
+                }
+            }
+    
+            $CarStore->photos()->delete();
+        });
+    
+        // Hapus gambar lama sebelum diperbarui
+        static::updating(function ($CarStore) {
+            if ($CarStore->isDirty('thumbnail') && $CarStore->getOriginal('thumbnail')) {
+                Storage::disk('public')->delete($CarStore->getOriginal('thumbnail'));
+            }
+        });
+    }
+    
 }
