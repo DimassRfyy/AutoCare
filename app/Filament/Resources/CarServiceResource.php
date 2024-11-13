@@ -17,7 +17,9 @@ class CarServiceResource extends Resource
 {
     protected static ?string $model = CarService::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'Service & Store Management';
+
+    protected static ?string $navigationIcon = 'heroicon-o-cog-8-tooth';
 
     public static function form(Form $form): Form
     {
@@ -37,12 +39,9 @@ class CarServiceResource extends Resource
                     ->required()
                     ->numeric(),
 
-                Forms\Components\FileUpload::make('photo')
-                    ->required()
-                    ->image(),
-
                 Forms\Components\FileUpload::make('icon')
                     ->required()
+                    ->directory('PhotoService')
                     ->image(),
 
                 Forms\Components\Textarea::make('about')
@@ -58,7 +57,8 @@ class CarServiceResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('price'),
+                Tables\Columns\TextColumn::make('price')
+                ->formatStateUsing(fn ($state) => 'Rp ' . number_format($state, 0, ',', '.')),
                 Tables\Columns\ImageColumn::make('icon')
             ])
             ->filters([
@@ -66,6 +66,7 @@ class CarServiceResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

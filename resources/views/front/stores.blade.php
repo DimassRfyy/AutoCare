@@ -69,7 +69,7 @@
                 <h1 class="font-semibold w-fit">4.8</h1>
               </div>
               <div class="flex items-center justify-end text-right gap-[2px]">
-                <p class="text-sm leading-[21px] text-[#909DBF]">145 Reviews</p>
+                <p class="text-sm leading-[21px] text-[#909DBF]">{{ $store->transactions->count() }} Reviews</p>
               </div>
             </div>
           </div>

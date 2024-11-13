@@ -47,4 +47,8 @@ class CarStore extends Model
     {
         return $this->belongsTo(City::class, 'city_id');
     }
+
+    public function transactions(): HasMany {
+        return $this->hasMany(BookingTransaction::class);
+    }
 }

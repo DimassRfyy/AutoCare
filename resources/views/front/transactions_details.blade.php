@@ -124,11 +124,31 @@
         </div>
       </div>
     </div>
-    <div class="px-8 mt-[30px] flex">
+    @php
+    $currentDateTime = now(); // Current date and time as a Carbon instance
+    $startedAt = $details->started_at->startOfDay(); // Convert to Carbon and set time to start of the day
+    $timeAt = $details->time_at; // Time from the database
+
+    // Combine the date from `started_at` and time from `time_at` for comparison
+    $targetDateTime = $startedAt->copy()->setTimeFromTimeString($timeAt);
+
+    // Check if current date and time is past the target date and time
+    $isPastDateAndTime = $currentDateTime->greaterThan($targetDateTime);
+@endphp
+    
+<div class="px-8 mt-[30px] flex">
+  @if($isPastDateAndTime)
+      <a href="{{ route('giveRating', ['id' => $details->id]) }}"
+         class="w-full rounded-full p-[12px_20px] bg-[#FF8E62] font-bold text-white text-center">
+          Give Rating
+      </a>
+  @else
       <a href="tel:{{$details->store_details->phone_number}}"
-        class="w-full rounded-full p-[12px_20px] bg-[#FF8E62] font-bold text-white text-center">Call
-        Customer Service</a>
-    </div>
+         class="w-full rounded-full p-[12px_20px] bg-[#FF8E62] font-bold text-white text-center">
+          Contact Customer Service
+      </a>
+  @endif
+</div>
   </main>
 </body>
 

@@ -16,7 +16,7 @@
     <div class="bg-[#270738] absolute top-0 max-w-[640px] w-full mx-auto rounded-b-[50px] h-[370px]"></div>
     <header class="flex flex-col gap-3 items-center text-center pt-10 relative z-10">
       <div class="flex shrink-0">
-        <img src="{{asset('assets/images/logos/logo.svg')}}" alt="logo">
+        <img src="{{asset('assets/images/logos/Logonew.png')}}" alt="logo">
       </div>
       <p class="text-sm leading-[21px] text-white">Premium Wash & Car Detailing</p>
     </header>

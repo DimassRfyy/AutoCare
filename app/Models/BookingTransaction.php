@@ -32,7 +32,7 @@ class BookingTransaction extends Model
 
     public static function generateUniqueTrxId()
     {
-        $prefix = 'CC';
+        $prefix = 'AUTO';
         do {
             $randomString = $prefix . mt_rand(1000, 9999);
         } while (self::where('trx_id', $randomString)->exists());

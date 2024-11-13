@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug')->unique();
+            $table->string('icon');
             $table->unsignedBigInteger('price');
             $table->text('about');
-            $table->string('photo');
             $table->unsignedBigInteger('duration_in_hour');
             $table->softDeletes();
             $table->timestamps();

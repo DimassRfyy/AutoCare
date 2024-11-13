@@ -20,6 +20,7 @@ class PhotosRelationManager extends RelationManager
             ->schema([
                 Forms\Components\FileUpload::make('photo')
                     ->image()
+                    ->directory('StorePhotos')
                     ->openable()
                     ->required(),
             ]);

@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\CarStoreResource\Pages;
 use App\Filament\Resources\CarStoreResource\RelationManagers;
 use App\Filament\Resources\CarStoreResource\RelationManagers\PhotosRelationManager;
+use App\Models\BookingTransaction;
 use App\Models\CarService;
 use App\Models\CarStore;
 use Filament\Forms;
@@ -20,7 +21,9 @@ class CarStoreResource extends Resource
 {
     protected static ?string $model = CarStore::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-building-storefront';
+
+    protected static ?string $navigationGroup = 'Service & Store Management';
 
     public static function form(Form $form): Form
     {
@@ -68,6 +71,7 @@ class CarStoreResource extends Resource
 
                 Forms\Components\FileUpload::make('thumbnail')
                     ->image()
+                    ->directory('PhotoStore')
                     ->required(),
 
                 Forms\Components\Textarea::make('address')
@@ -119,7 +123,9 @@ class CarStoreResource extends Resource
                     }),
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
