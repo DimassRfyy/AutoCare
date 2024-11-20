@@ -10,11 +10,7 @@ use Illuminate\Support\Facades\DB;
 class PopularServiceChart extends ChartWidget
 {
     protected static ?string $heading = 'Popular Services';
-    public function getDescription(): ?string
-{
-    return 'Most Ordered Service';
-}
-    protected static ?string $maxHeight = '430px';
+    protected static ?string $maxHeight = '290px';
 
     protected function getData(): array
     {

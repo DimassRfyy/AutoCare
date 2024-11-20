@@ -8,7 +8,7 @@ use App\Models\CarStore;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
-class StatsOverview extends BaseWidget
+class TrxStatsOverview extends BaseWidget
 {
     protected static bool $isLazy = true;
     protected function getStats(): array
